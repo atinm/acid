@@ -6,8 +6,10 @@ body {
 }
 
 .acid-board {
-  top: 0;
+  position: absolute;
+  top: 20;
   left: 0;
-  min-width: 400px;
-  min-height: 400px;
+  width: 600px;
+  height: 600px;
+  resize: none;
 }

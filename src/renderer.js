@@ -1,4 +1,4 @@
-const kokopu = require('./lib/kokopu');
-//const Chessground = require('./lib/chessground').Chessground;
-const config = {};
-const ground = Chessground(document.getElementById("board"), config);
+const chess = require('./lib/kokopu');
+
+var config = { resizable: true };
+const cg = Chessground(document.getElementById("board"), config);

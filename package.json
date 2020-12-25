@@ -1,6 +1,6 @@
 {
   "name": "acid",
-  "productName": "acid",
+  "productName": "Acid",
   "version": "1.0.0",
   "description": "Atin's Chess Information Database",
   "main": "src/index.js",
@@ -14,9 +14,9 @@
   "keywords": [],
   "author": {
     "name": "Atin M",
-    "email": "atinm.dev@lookout.com"
+    "email": "atinm.dev@gmail.com"
   },
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "config": {
     "forge": {
       "packagerConfig": {},

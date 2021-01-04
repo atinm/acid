@@ -1,14 +1,29 @@
-# Atin's Chess Information Database
+# atins-chess-trainer
 
-This is an ElectronJS based App for being able to use PGN files.
+## Project setup
+```
+npm install
+```
 
-# Building and Running
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-    yarn install
-    yarn start
+### Compiles and runs electron app
+```
+npm run electron:serve
+```
 
-# Building a distributable image
+### Compiles and minifies for production
+```
+npm run electron:build
+```
 
-    yarn make
-    
-This will create Acid.app under out/Acid-darwin-x64/ for Mac OS (I haven't tried anything else yet).
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

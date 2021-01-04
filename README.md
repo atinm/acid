@@ -1,4 +1,4 @@
-# atins-chess-trainer
+# Atin's Chess Information Database
 
 ## Project setup
 ```

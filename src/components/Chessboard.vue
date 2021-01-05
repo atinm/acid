@@ -1,5 +1,5 @@
 <template>
-  <div class="brown merida">
+  <div v-bind:class="[b, p]">
     <div id="board" ref="board" class="cg-board-wrap"></div>
   </div>
 </template>
@@ -11,6 +11,14 @@ import { Chessground } from 'chessgroundx'
 export default {
   name: 'Chessboard',
   props: {
+    boardStyle: {
+      type: String,
+      default: 'brown'
+    },
+    pieceStyle: {
+      type: String,
+      default: 'merida'
+    },
     fen: {
       type: String,
       default: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
@@ -28,7 +36,11 @@ export default {
     }
   },
   data: function () {
-    return { currentFen: this.position === undefined ? this.fen : this.position.fen() }
+    return {
+      b: this.boardStyle,
+      p: this.pieceStyle,
+      currentFen: this.position === undefined ? this.fen : this.position.fen()
+    }
   },
   watch: {
     fen: function (newFen) {

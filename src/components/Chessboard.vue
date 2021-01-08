@@ -1,44 +1,20 @@
 <template>
-  <section>
-    <div v-bind:class="[board, pieces]">
-      <div id="board" ref="board" class="cg-board-wrap"></div>
-    </div>
-    <div class="modal" :class="{'is-active': showPromotionModal}">
-      <div class="modal-background"></div>
-      <div class="modal-content">
-        <div class="buttons">
-          <div class="alpha">
-            <button class="button" type="button" @click="promote('q'); $emit('close')">
-              <div class="piece queen black"/>
-            </button>
-          </div>
-          <div class="alpha">
-            <button class="button" type="button" @click="promote('r'); $emit('close')">
-              <div class="piece rook black"/>
-            </button>
-          </div>
-          <div class="alpha">
-            <button class="button" type="button" @click="promote('b'); $emit('close')">
-              <div class="piece bishop black"/>
-            </button>
-          </div>
-          <div class="alpha">
-            <button class="button" type="button" @click="promote('n'); $emit('close')">
-              <div class="piece knight black"/>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div v-bind:class="[board, pieces]">
+    <div id="board" ref="board" class="cg-board-wrap"></div>
+  </div>
 </template>
 
 <script>
 import { Position } from 'kokopu'
 import { Chessground } from 'chessgroundx'
+/* eslint-disable vue/no-unused-components */ // needed because we create the component dynamically
+import PromotionModal from '@/components/Promote.vue'
 
 export default {
   name: 'Chessboard',
+  components: {
+    PromotionModal
+  },
   props: {
     boardStyle: {
       type: String,
@@ -55,10 +31,6 @@ export default {
     edit: {
       type: Boolean
     },
-    onPromotion: {
-      type: Function,
-      default: () => 'q'
-    },
     orientation: {
       type: String,
       default: 'white'
@@ -66,7 +38,6 @@ export default {
   },
   data: function () {
     return {
-      showPromotionModal: false,
       board: this.boardStyle,
       pieces: this.pieceStyle,
       currentFen: this.position === undefined ? this.fen : this.position.fen()
@@ -148,13 +119,6 @@ export default {
               this.from = orig
               this.to = dest
               this.cardModal()
-              // this.onPromotion().then((p) => {
-              //  if (p !== undefined) {
-              //    this.promoteTo = p
-              //    this.position.play(result(this.promoteTo))
-              //  }
-              //  this.updateBoard()
-              // }).catch((e) => console.log(e))
               break
             case 'regular':
               this.from = orig
@@ -193,6 +157,22 @@ export default {
     },
     cardModal () {
       this.showPromotionModal = true
+      this.$buefy.modal.open({
+        parent: this,
+        component: PromotionModal,
+        props: {
+          visible: true,
+          pieceStyle: this.pieceStyle,
+          turn: this.toColor()
+        },
+        events: {
+          promote: p => {
+            this.promote(p)
+          }
+        },
+        hasModalCard: true,
+        trapFocus: true
+      })
     }
   },
   mounted () {
